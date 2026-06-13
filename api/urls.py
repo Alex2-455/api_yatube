@@ -11,10 +11,21 @@ urlpatterns = [
     path('v1/api-token-auth/', token_views.obtain_auth_token),
     path('v1/', include(router.urls)),
     # Маршруты для комментариев через re_path
-    re_path(r'^v1/posts/(?P<post_id>\d+)/comments/$', 
-            views.CommentViewSet.as_view({'get': 'list', 'post': 'create'}), 
-            name='post-comments-list'),
-    re_path(r'^v1/posts/(?P<post_id>\d+)/comments/(?P<pk>\d+)/$', 
-            views.CommentViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}), 
-            name='post-comments-detail'),
+    re_path(
+        r'^v1/posts/(?P<post_id>\d+)/comments/$',
+        views.CommentViewSet.as_view({'get': 'list', 'post': 'create'}),
+        name='post-comments-list'
+    ),
+    re_path(
+        r'^v1/posts/(?P<post_id>\d+)/comments/(?P<pk>\d+)/$',
+        views.CommentViewSet.as_view(
+            {
+                'get': 'retrieve',
+                'put': 'update',
+                'patch': 'partial_update',
+                'delete': 'destroy'
+            }
+        ),
+        name='post-comments-detail'
+    ),
 ]
